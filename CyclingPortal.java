@@ -3,6 +3,7 @@ package cycling;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 
 /**
@@ -116,8 +117,8 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int createTeam(String name, String description) throws IllegalNameException, InvalidNameException {
-		// TODO Auto-generated method stub
-		return 0;
+		teamName = name;
+		Team teamName = new Team(name, team.count);
 	}
 
 	@Override
