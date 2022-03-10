@@ -26,15 +26,6 @@ public class CyclingPortal implements CyclingPortalInterface {
 	public int createRace(String name, String description) throws IllegalNameException, InvalidNameException {
 		int RaceIds[];
         
-        if (name.length >= 30 || 0); 
-        {
-			throw InvalidNameException;
-		}
-		
-        name = name.replaceAll("\s", "");
-
-        RaceIds[i] = name.RaceID;
-
 		return RaceID;
 	}
 
