@@ -2,20 +2,26 @@ package cycling;
 
 public class Race {
 
-    private String stringName;
-    private String stringDescription;
+    private String name;
+    private String description;
     private int raceId;
     private int numberOfStages;
+    private static int count = 0;
     
-    public Race(String stringDescription, int numberOfStages) {
-        this.stringName = "Race";
-        this.stringDescription = stringDescription;
-        this.raceId = 2;
+    Race(String name, String description, int numberOfStages) {
+        
+        this.name = name;
+        if (name.length() >= 30 || name.length() == 0); {
+            throw InvalidNameException;
+		}
+		 
+        
+        this.description = description;
         this.numberOfStages = numberOfStages;
+        count++;
+        raceId = count;
     }
 
-    /** public static void main(String[] args) {
-        Race raceyboy = new Race("A cool race", 10);
-    }**/
-
 }
+
+
