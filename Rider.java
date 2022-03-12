@@ -14,5 +14,21 @@ public class Rider {
         this.teamId = teamId;
         count++;
         riderId = count;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public int getRiderId() {
+        return riderId;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
 }
