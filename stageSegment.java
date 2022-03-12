@@ -7,4 +7,19 @@ public class stageSegment {
     private double averageGradient;
     private double length;
 
+    public int getSegmentId() {
+        return segmentId;
+    }
+
+    public SegmentType getType() {
+        return type;
+    }
+
+    public double getAverageGradient() {
+        return averageGradient;
+    }
+
+    public double getLength() {
+        return length;
+    }
 }
