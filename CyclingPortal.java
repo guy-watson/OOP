@@ -19,7 +19,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public int[] getRaceIds() 
 	{
-		return null;
+		return RaceIdsArray;
 	}
 
 	@Override
