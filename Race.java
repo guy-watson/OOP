@@ -11,11 +11,10 @@ public class Race {
     Race(String name, String description, int numberOfStages) {
         
         this.name = name;
-        if (name.length() >= 30 || name.length() == 0); {
+        if (name.length() >= 30 || name.isEmpty() || name.trim().isEmpty() || name == null || name.contains(" ")); {
             throw InvalidNameException;
 		}
 		 
-        
         this.description = description;
         this.numberOfStages = numberOfStages;
         count++;
@@ -23,5 +22,3 @@ public class Race {
     }
 
 }
-
-
