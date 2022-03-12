@@ -13,5 +13,17 @@ public class Team {
   count++;
   teamId = count;
   }
-}
 
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public String getName() {
+        return name;
+        }
+    
+    public int getDescription() {
+        return teamId;
+    }    
+    
+}
