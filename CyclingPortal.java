@@ -15,6 +15,9 @@ import java.util.Arrays;
  *
  */
 public class CyclingPortal implements CyclingPortalInterface {
+	
+	private final ArrayList<Race> raceArrayList;
+	private final ArrayList<Team> teamArrayList;
 
 	@Override
 	public int[] getRaceIds() 
@@ -32,7 +35,6 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int createRace(String name, String description) throws IllegalNameException, InvalidNameException {
-		ArrayList<Race> raceArrayList = new ArrayList<Race>();
 		return RaceID;
 	}
 
@@ -115,8 +117,26 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int createTeam(String name, String description) throws IllegalNameException, InvalidNameException {
-		teamName = name;
-		Team teamName = new Team(name, team.count);
+		/**
+		* Creates a team with name and description.
+		* <p>
+		* The state of this MiniCyclingPortalInterface must be unchanged if any
+		* exceptions are thrown.
+		*
+		* @param name The identifier name of the team.
+		* @param description A description of the team.
+		* @return The ID of the created team.
+		* @throws IllegalNameException If the name already exists in the platform.
+		* @throws InvalidNameException If the new name is null, empty, has more than
+		* 30 characters.
+		*/
+		//String teamName;
+		//teamName = name;
+		Team team = new Team(name, description);
+		team.setName(name);
+		team.setDescription(description);
+		return team.getTeamId();
+		//team.setTeamId(team.count);
 	}
 
 	@Override
@@ -258,6 +278,15 @@ public class CyclingPortal implements CyclingPortalInterface {
 	public int[] getRidersMountainPointClassificationRank(int raceId) throws IDNotRecognisedException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public CyclingPortal() {
+		raceArrayList = new ArrayList<>();
+		teamArrayList = new ArrayList<>();
+	}
+
+	public static void main(String[] args) {
+
 	}
 
 }
