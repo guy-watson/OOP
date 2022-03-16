@@ -1,6 +1,7 @@
 package cycling;
 
 public class Rider {
+// Attributes
 
     private String name;
     private int yearOfBirth;
@@ -15,6 +16,8 @@ public class Rider {
         count++;
         riderId = count;
     }
+    
+    // Getters 
 
     public String getName() {
         return name;
@@ -31,4 +34,18 @@ public class Rider {
     public int getTeamId() {
         return teamId;
     }
+    // Setters 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public void setRiderId(int riderId) {
+        this.riderId = riderId;
+    }
+
 }

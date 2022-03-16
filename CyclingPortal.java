@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 /**
  * BadCyclingPortal is a minimally compiling, but non-functioning implementor
@@ -19,13 +19,20 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public int[] getRaceIds() 
 	{
-		return RaceIdsArray;
+		int j = raceArrayList.size();
+		int[] raceIdsArray = new int[j];
+
+		// CHECK BACK ON THIS
+
+		for (int i=0;i<raceArrayList.size();i++) {
+			raceIdsArray[i] = raceArrayList.get(i).getRaceId();
+		}				
+		return raceIdsArray;
 	}
 
 	@Override
 	public int createRace(String name, String description) throws IllegalNameException, InvalidNameException {
-		int RaceIds[];
-        
+		ArrayList<Race> raceArrayList = new ArrayList<Race>();
 		return RaceID;
 	}
 
