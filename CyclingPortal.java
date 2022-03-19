@@ -22,10 +22,9 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public int[] getRaceIds() 
 	{
+		// Needs testing
 		int j = raceArrayList.size();
 		int[] raceIdsArray = new int[j];
-
-		// CHECK BACK ON THIS
 
 		for (int i=0;i<raceArrayList.size();i++) {
 			raceIdsArray[i] = raceArrayList.get(i).getRaceId();
@@ -117,21 +116,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int createTeam(String name, String description) throws IllegalNameException, InvalidNameException {
-		/**
-		* Creates a team with name and description.
-		* <p>
-		* The state of this MiniCyclingPortalInterface must be unchanged if any
-		* exceptions are thrown.
-		*
-		* @param name The identifier name of the team.
-		* @param description A description of the team.
-		* @return The ID of the created team.
-		* @throws IllegalNameException If the name already exists in the platform.
-		* @throws InvalidNameException If the new name is null, empty, has more than
-		* 30 characters.
-		*/
-		//String teamName;
-		//teamName = name;
+		// Needs testing
 		Team team = new Team(name, description);
 		team.setName(name);
 		team.setDescription(description);
@@ -141,20 +126,31 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public void removeTeam(int teamId) throws IDNotRecognisedException {
-		// TODO Auto-generated method stub
-
+		//Needs testing
+		// Need to do exception
+		teamArrayList.remove(team.teamId);
 	}
 
 	@Override
 	public int[] getTeams() {
-		// TODO Auto-generated method stub
-		return null;
+		// Needs testing
+		int j = teamArrayList.size();
+		int[] teamIdsArray = new int[j];
+		for (int i=0;i<teamArrayList.size();i++) {
+			teamIdsArray[i] = teamArrayList.get(i).getTeamId();
+		}				
+		return teamIdsArray;
 	}
 
 	@Override
 	public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
-		// TODO Auto-generated method stub
-		return null;
+		// Need to create an array list of riders in a team
+		int j = teamArrayList.size();
+		int[] teamIdsArray = new int[j];
+		for (int i=0;i<teamArrayList.size();i++) {
+			teamIdsArray[i] = teamArrayList.get(i).getTeamId();
+		}				
+		return teamIdsArray;
 	}
 
 	@Override

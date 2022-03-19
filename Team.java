@@ -43,9 +43,6 @@ public class Team {
     //if (teamArrayList.getAttribute(name).equals(name)) {
     //    throw IllegalNameException();
     //}
-
-    
-
   this.name = name;
   this.description = description;
   count++;
