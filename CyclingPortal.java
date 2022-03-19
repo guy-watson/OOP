@@ -39,8 +39,18 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public String viewRaceDetails(int raceId) throws IDNotRecognisedException {
-		// TODO Auto-generated method stub
-		return null;
+		// Needs testing
+		for(int i = 0; i < raceArrayList.size(); i++) {
+			if(raceArrayList.get(i).getRaceId = raceId){
+				selectedRace = raceArrayList.get(i);
+			}
+		}
+		rID = selectedRace.getRaceId();
+		n = selectedRace.getName();
+		d = selectedRace.getDescription();
+		nos = selectedRace.getNumberOfStages();
+		l = selectedRace.getTotalLength();
+		return System.out.printf("RaceID: , Name: , Description: , Number of Stages: , Total Length: ", rID, n, d, nos, l);;
 	}
 
 	@Override
