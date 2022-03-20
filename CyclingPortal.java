@@ -41,12 +41,12 @@ public class CyclingPortal implements CyclingPortalInterface {
 	public String viewRaceDetails(int raceId) throws IDNotRecognisedException {
 		// Needs testing
 		for(int i = 0; i < raceArrayList.size(); i++) {
-			if(raceArrayList.get(i).getRaceId = raceId){
+			if(raceArrayList.get(i).getRaceId == raceId){
 				selectedRace = raceArrayList.get(i);
 			}
 		}
 
-		if(selectedRace = null){
+		if(selectedRace == null){
 			throw IDNotRecognisedException("That Race ID does not exist.");
 		}
 
@@ -55,6 +55,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 		d = selectedRace.getDescription();
 		nos = selectedRace.getNumberOfStages();
 		l = selectedRace.getTotalLength();
+		
 		return System.out.printf("RaceID: %d, Name: %s, Description: %d, Number of Stages: %s, Total Length: %d", rID, n, d, nos, l);
 	}
 
@@ -63,11 +64,13 @@ public class CyclingPortal implements CyclingPortalInterface {
 		// Needs testing
 		for(int i = 0; i < raceArrayList.size(); i++) {
 			if(raceArrayList.get(i).getRaceId = raceId){
-				
 				raceArrayList.remove(i);
+				if(i == raceArrayList.size()){
+					throw IDNotRecognisedException("That Race ID does not exist.");
+				}
 			}
 		}
-		if(selectedRace = null){
+		if(selectedRace == null){
 			throw IDNotRecognisedException("That Race ID does not exist.");
 		}
 	}
@@ -79,9 +82,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 	}
 
 	@Override
-	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime,
-			StageType type)
-			throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
+	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -141,8 +142,8 @@ public class CyclingPortal implements CyclingPortalInterface {
 	public int createTeam(String name, String description) throws IllegalNameException, InvalidNameException {
 		// Needs testing
 		Team team = new Team(name, description);
-		team.setName(name);
-		team.setDescription(description);
+		//team.setName(name);
+		//team.setDescription(description);
 		return team.getTeamId();
 		//team.setTeamId(team.count);
 	}
@@ -152,6 +153,14 @@ public class CyclingPortal implements CyclingPortalInterface {
 		//Needs testing
 		// Need to do exception
 		teamArrayList.remove(team.teamId);
+		for(int i = 0; i < teamArrayList.size(); i++) {
+			if(teamArrayList.get(i).getTeamId() == teamId){
+				teamArrayList.remove(i);
+				if(i = teamArrayList.size()){
+					throw IDNotRecognisedException("That Team ID does not exist.");
+				}
+			}
+		}
 	}
 
 	@Override
@@ -241,7 +250,10 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public void eraseCyclingPortal() {
-		// TODO Auto-generated method stub
+		teamArrayList.clear();
+		raceArrayList.clear();
+		
+
 
 	}
 
