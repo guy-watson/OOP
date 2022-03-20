@@ -45,18 +45,31 @@ public class CyclingPortal implements CyclingPortalInterface {
 				selectedRace = raceArrayList.get(i);
 			}
 		}
+
+		if(selectedRace = null){
+			throw IDNotRecognisedException("That Race ID does not exist.");
+		}
+
 		rID = selectedRace.getRaceId();
 		n = selectedRace.getName();
 		d = selectedRace.getDescription();
 		nos = selectedRace.getNumberOfStages();
 		l = selectedRace.getTotalLength();
-		return System.out.printf("RaceID: , Name: , Description: , Number of Stages: , Total Length: ", rID, n, d, nos, l);;
+		return System.out.printf("RaceID: %d, Name: %s, Description: %d, Number of Stages: %s, Total Length: %d", rID, n, d, nos, l);
 	}
 
 	@Override
 	public void removeRaceById(int raceId) throws IDNotRecognisedException {
-		// TODO Auto-generated method stub
-
+		// Needs testing
+		for(int i = 0; i < raceArrayList.size(); i++) {
+			if(raceArrayList.get(i).getRaceId = raceId){
+				
+				raceArrayList.remove(i);
+			}
+		}
+		if(selectedRace = null){
+			throw IDNotRecognisedException("That Race ID does not exist.");
+		}
 	}
 
 	@Override
