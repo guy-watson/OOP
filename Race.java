@@ -12,18 +12,16 @@ public class Race {
     private int raceId;
     private int numberOfStages;
     private int totalLength;
+    private ArrayList<Stage> raceStagesArrayList;
     private static int count = 0;
     
-    Race(String name, String description, int numberOfStages) {
+    Race(String name, String description) {
+        // Needs testing
+        // Need to add race to race array list
         this.name = name;
-        if (name.length() >= 30 || name.isEmpty() || name.trim().isEmpty() || name == null || name.contains(" ")); {
-            throw new InvalidNameException;
-		}
         this.description = description;
-        this.numberOfStages = numberOfStages;
         count++;
         raceId = count; 
-        raceArrayList.add(this);
     }
 
     // Getters
@@ -48,6 +46,10 @@ public class Race {
         return totalLength;
     }
 
+    public ArrayList<Stage> getRaceStagesArrayList() {
+        return raceStagesArrayList;
+    }
+
     // Setters 
 
     public void setName(String name) {
@@ -62,7 +64,12 @@ public class Race {
     public void setNumberOfStages(int numberOfStages) {
         this.numberOfStages = numberOfStages;
     }
+    public void setRaceStagesArrayList(ArrayList<Stage> raceStagesArrayList) {
+        this.raceStagesArrayList = raceStagesArrayList;
+    }
 
     // Methods
+
+    // add stages to
 
 }

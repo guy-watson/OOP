@@ -1,14 +1,32 @@
 package cycling;
 
+import java.time.LocalDateTime;
+
 public class Stage {
 // Attributes
     private String stageName;
     private String description;
-    private int length;
+    private double length;
     private int raceId;
-    private int startTime;
+    private int stageId;
+    private LocalDateTime startTime;
     private StageType type;
+    private static int count = 0;
+    
     // private Double location;
+
+    public Stage(String stageName, String description, double length, int raceId, LocalDateTime startTime, StageType type) {
+        // Needs testing
+        // Need to add race to race array list
+        this.stageName = stageName;
+        this.description = description;
+        this.length = length;
+        this.raceId = raceId;
+        this.startTime = startTime;
+        this.type = type; 
+        count++;
+        stageId = count;
+    }
     
     // Getters
 
@@ -20,7 +38,7 @@ public class Stage {
         return description;
     }
 
-    public int getLength() {
+    public double getLength() {
         return length;
     }
 
@@ -28,7 +46,11 @@ public class Stage {
         return raceId;
     }
 
-    public int getStartTime() {
+     public int getStageId() {
+        return stageId;
+    }
+
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
@@ -46,15 +68,19 @@ public class Stage {
         this.description = description;
     }
 
-    public void setLength(int length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
     public void setRaceId(int raceId) {
         this.raceId = raceId;
     }
+    
+     public void setStageId(int stageId) {
+        this.stageId = stageId;
+    }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
