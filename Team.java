@@ -26,20 +26,8 @@ public class Team {
     //}
 
 
-  Team(String name, String description) {
-    if (name.length() >= 30); {
-        throw InvalidNameException("The name is too long");
-    } if (name.isEmpty()) {
-        throw InvalidNameException("The name is empty");
-    } if (name.trim().isEmpty()) {
-        throw InvalidNameException("The name is empty");
-    } if (name == null) {
-        throw InvalidNameException("The name is null");
-    } if (name.contains(" ")) {
-        throw InvalidNameException("The name contains a white space");
-    } if (teamArrayList.contains(name)) {
-        throw IllegalNameException();
-    } 
+  Team(String name, String description) throws InvalidNameException, IllegalNameException {
+    
     //if (teamArrayList.getAttribute(name).equals(name)) {
     //    throw IllegalNameException();
     //}
@@ -47,7 +35,8 @@ public class Team {
   this.description = description;
   count++;
   teamId = count;
-  teamArrayList.add(this);
+  //teamArrayList.add(this);
+  // ***** teamArrayList.add(new Team(name, description);
   }
     
     // Getters
@@ -60,7 +49,7 @@ public class Team {
         return name;
         }
     
-    public int getDescription() {
+    public String getDescription() {
         return description;
     }  
     

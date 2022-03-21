@@ -11,12 +11,13 @@ public class Race {
     private String description;
     private int raceId;
     private int numberOfStages;
+    private int totalLength;
     private static int count = 0;
     
     Race(String name, String description, int numberOfStages) {
         this.name = name;
         if (name.length() >= 30 || name.isEmpty() || name.trim().isEmpty() || name == null || name.contains(" ")); {
-            throw InvalidNameException;
+            throw new InvalidNameException;
 		}
         this.description = description;
         this.numberOfStages = numberOfStages;
@@ -41,6 +42,10 @@ public class Race {
 
     public int getNumberOfStages() {
         return numberOfStages;
+    }
+    
+    public int getTotalLength() {
+        return totalLength;
     }
 
     // Setters 

@@ -1,7 +1,8 @@
 package cycling;
 
 public class Rider {
-// Attributes
+    // Attributes
+    // add points attribute
 
     private String name;
     private int yearOfBirth;
@@ -9,12 +10,12 @@ public class Rider {
     private int teamId;
     private static int count = 0;
 
-    Rider(String name, int yearOfBirth, int teamId) {
+    Rider(int teamId, String name, int yearOfBirth) {
+        this.teamId = teamId;
         this.name = name;
         this.yearOfBirth = yearOfBirth;
-        this.teamId = teamId;
         count++;
-        riderId = count;
+        this.riderId = count;
     }
     
     // Getters 

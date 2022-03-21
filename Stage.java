@@ -46,7 +46,7 @@ public class Stage {
         this.description = description;
     }
 
-    public void setLength(String length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
