@@ -20,6 +20,9 @@ public class CyclingPortal implements CyclingPortalInterface {
 	private final ArrayList<Race> raceArrayList;
 	private final ArrayList<Team> teamArrayList;
 	private final ArrayList<Rider> riderArrayList;
+	private final ArrayList<Stage> stageArrayList;
+	
+	//private final ArrayList<Stage> raceStagesArrayList;
 
 	@Override
 	public int[] getRaceIds() 
@@ -45,17 +48,17 @@ public class CyclingPortal implements CyclingPortalInterface {
 		//if(name.length() >= 30 || name.isEmpty() || name.trim().isEmpty() || name == null || name.contains///(" ")); {
         //    throw new InvalidNameException("That is an invalid name.");
 		//}
-	
 	}
 
 	@Override
 	public String viewRaceDetails(int raceId) throws IDNotRecognisedException {
 		
 		// ** Needs testing
+		// Works until you try and add stages
 		Race selectedRace = null;
 		String output = null;
 		
-		for(int i = 0; i <= raceArrayList.size(); i++) {
+		for(int i = 0; i < raceArrayList.size(); i++) {
 			if(raceArrayList.get(i).getRaceId() == raceId){
 				
 				selectedRace = raceArrayList.get(i);
@@ -64,7 +67,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 				String d = selectedRace.getDescription();
 				int nos = selectedRace.getNumberOfStages();
 				Object l = selectedRace.getTotalLength();
-				output = String.format("RaceID: %d, Name: %s, Description: %d, Number of Stages: %s, Total Length: %d", rID, n, d, nos, l);
+				output = String.format("RaceID: %d, Name: %s, Description: %s, Number of Stages: %s, Total Length: %d", rID, n, d, nos, l);
 				//if(i == raceArrayList.size() && selectedRace == null){
 				//	throw new IDNotRecognisedException("That Race ID does not exist.");
 				//}
@@ -88,65 +91,87 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int getNumberOfStages(int raceId) throws IDNotRecognisedException {
-		// TODO Auto-generated method stub
-		return 0;
+		// Needs testing
+		int numOfStages = 0;
+		for(int i = 0; i < raceArrayList.size(); i++) {
+			if(raceArrayList.get(i).getRaceId() == raceId){
+				numOfStages = ((MiniCyclingPortalInterface) raceArrayList).getNumberOfStages(i);
+				if(i == raceArrayList.size()){
+					throw new IDNotRecognisedException("That Race ID does not exist.");
+				}
+			}
+		}
+		return numOfStages;
 	}
 
 	@Override
 	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
-		// Needs testing
-
-		// each race will have an arraylist of stages as an attribute?
-		// WIll need to increase stages
-
-		//find the race object via its raceid
-		//add the stage
+		// workywork
 		// throw exceptions
-		// increase number of stages in race object
+		Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
 		
-		// Race findRace(int raceId) {
-		//     for(Race race : ArrayListRace) {
-		//         if(race.raceId().equals(raceId)) {
-		//             return race;
-
-		Race raceToAddStageTo = null;
-		
-		for(int i = 0; i < raceArrayList.size(); i++) {
+		for(int i = 0; i < raceArrayList.size(); i++) {		
 			if(raceArrayList.get(i).getRaceId() == raceId){
-				raceToAddStageTo = raceArrayList.get(i);
-				if(i == raceArrayList.size()){
-					throw new IDNotRecognisedException("That Race ID does not exist.");
-				}
-			
+				Stage[] stageArrayA =  new Stage[100];
+				stageArrayA = raceArrayList.get(i).getStageArray();
+				stageArrayA[newStage.getStageId()] = newStage;
+				raceArrayList.get(i).setStageArray(stageArrayA);
+				int stageCount = raceArrayList.get(i).getNumberOfStages();
+				stageCount++;
+				raceArrayList.get(i).setNumberOfStages(stageCount);
 			}
-			
-				//return raceToAddStageTo;
 		}
-		
-		Stage stageToAdd = new Stage(stageName, description, length, raceId, startTime, type);
-
-		ArrayList<Stage> currentStageArrayList = raceToAddStageTo.getRaceStagesArrayList();
-		currentStageArrayList.add(stageToAdd);
-		raceToAddStageTo.setRaceStagesArrayList(currentStageArrayList);
-		
-		int currentNumOfStages = raceToAddStageTo.getNumberOfStages();
-		currentNumOfStages++;
-		raceToAddStageTo.setNumberOfStages(currentNumOfStages); 
-
-		return 0; 
+		return newStage.getStageId();
 	}
 
 	@Override
 	public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
-		// TODO Auto-generated method stub
-		return null;
+		// Needs testing
+		
+		// Need to find the race of the race ID
+		// need to get the arraylist of stages from that race = "stageArrayList"
+		// turn that array list into an array and return
+		ArrayList<Stage> raceStagesList = null; 
+		int[] raceStagesIDList = new int[1000];
+		for(int i = 0; i < raceArrayList.size(); i++) {
+			if(i == raceArrayList.size()){
+					throw new IDNotRecognisedException("That Race ID does not exist.");
+				}
+			if(raceArrayList.get(i).getRaceId() == raceId){
+				raceStagesList = raceArrayList.get(i).getRaceStagesArrayList();
+					for(int k = 0; k < raceStagesList.size(); k++) {
+						raceStagesIDList[k] = (raceStagesList.get(k).getStageId());
+					}
+			}
+		}
+		return raceStagesIDList;
+		
 	}
 
 	@Override
 	public double getStageLength(int stageId) throws IDNotRecognisedException {
-		// TODO Auto-generated method stub
-		return 0;
+		// Needs testing
+		// THIS DOES NOT WORK 
+		// Needs to throw exception
+		//Stage stage1 = null;
+		// SDADSHADSAKJDSAKJDHSAKJDHSAKJDHSAKJDSAKJD
+		// SADJSADHKSADHSAJDKSADHSAJDSAKDJSADSA
+		// DSAJKDHSAKJDHSAKJDHSAKJDHSAKJDHASKJDSAHKD
+		// SDAHJDSAKJDHSAKJDHSAKJDASKJDHASJDSAKJDSA
+		double length = 0;
+		for(int i = 0; i < stageArrayList.size(); i++) {
+			if(stageArrayList.get(i).getStageId() == stageId){
+				length = stageArrayList.get(i).getLength();
+				
+			}
+					
+	
+		}
+		return length;
 	}
+		
+		
+	
 
 	@Override
 	public void removeStageById(int stageId) throws IDNotRecognisedException {
@@ -402,6 +427,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 		raceArrayList = new ArrayList<>();
 		teamArrayList = new ArrayList<>();
 		riderArrayList = new ArrayList<>();
+		stageArrayList = new ArrayList<>();
 	}
 
 	public static void main(String[] args) {
