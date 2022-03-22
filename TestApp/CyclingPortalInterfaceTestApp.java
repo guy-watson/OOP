@@ -1,9 +1,14 @@
 import cycling.CyclingPortal;
 import cycling.CyclingPortalInterface;
+import cycling.IDNotRecognisedException;
 import cycling.IllegalNameException;
+import cycling.InvalidLengthException;
 import cycling.InvalidNameException;
 import cycling.MiniCyclingPortalInterface;
+import cycling.StageType;
+
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -24,8 +29,10 @@ public class CyclingPortalInterfaceTestApp {
 	 * @param args not used
 	 * @throws InvalidNameException
 	 * @throws IllegalNameException
+	 * @throws InvalidLengthException
+	 * @throws IDNotRecognisedException
 	 */
-	public static void main(String[] args) throws IllegalNameException, InvalidNameException {
+	public static void main(String[] args) throws IllegalNameException, InvalidNameException, IDNotRecognisedException, InvalidLengthException {
 		System.out.println("The system compiled and started the execution...");
 
 		//MiniCyclingPortalInterface portal = MiniCyclingPortalInterfaceal();
@@ -34,11 +41,27 @@ public class CyclingPortalInterfaceTestApp {
 		assert (portal.getRaceIds().length == 0)
 				: "Innitial SocialMediaPlatform not empty as required or not returning an empty array.";
 
-		portal.createRace("wheelybike", "wheely bike race");
-		portal.createRace("wheelooooo", "whellooooooo");
-		portal.createRace("mealsonwheels", "mealsonwhelllssssss");
+		for (Integer i = 0;i <= 100; i++) {
+			portal.createRace("wheelyrace" + " " + i+1, "wheely bike race" + " " + i+1);
+		}
+		System.out.println("------------------------------------------------------------");
 		String testRaceIds = Arrays.toString(portal.getRaceIds());
 		System.out.println(testRaceIds);
 		System.out.println("Hello");
+		System.out.println("------------------------------------------------------------");
+
+		LocalDateTime datetime1 = LocalDateTime.of(2017, 1, 14, 10, 34);  
+		StageType flatStage = StageType.FLAT;
+		portal.addStageToRace(1, "race1", "stage1", 15.3, datetime1, flatStage);
+		portal.addStageToRace(1, "race1", "stage1", 15.3, datetime1, flatStage);
+		portal.addStageToRace(1, "race1", "stage1", 15.3, datetime1, flatStage);
+		portal.addStageToRace(1, "race1", "stage1", 15.3, datetime1, flatStage);
+		
+		System.out.println("------------------------------------------------------------");
+		System.out.println(portal.getStageLength(1));
+		System.out.println("------------------------------------------------------------");
+
+		System.out.println(portal.viewRaceDetails(1));
 	}
+
 }
