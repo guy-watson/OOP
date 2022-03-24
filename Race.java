@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 import java.util.ArrayList;
 // We need to create an array of raceIds
@@ -11,18 +11,24 @@ public class Race {
     private String description;
     private int raceId;
     private int numberOfStages;
+    private double totalLength;
+    private Stage[] stageArray = new Stage[1000];
+    private Stage[] raceStagesArrayList;
     private static int count = 0;
     
-    Race(String name, String description, int numberOfStages) {
+    Race(String name, String description) {
+        // Needs testing
+        // Need to add race to race array list
         this.name = name;
-        if (name.length() >= 30 || name.isEmpty() || name.trim().isEmpty() || name == null || name.contains(" ")); {
-            throw InvalidNameException;
-		}
         this.description = description;
-        this.numberOfStages = numberOfStages;
         count++;
         raceId = count; 
-        raceArrayList.add(this);
+    }
+
+    Race RaceEmpty() {
+        count++;
+        raceId = count;
+        return null;
     }
 
     // Getters
@@ -39,8 +45,20 @@ public class Race {
         return raceId;
     }
 
-    public int getNumberOfStages() {
+    public int getNumberOfStagesInArray() {
         return numberOfStages;
+    }
+    
+    public double getTotalLength() {
+        return totalLength;
+    }
+
+    public Stage[] getStageArray() {
+        return stageArray;
+    }
+
+    public ArrayList<Stage> getRaceStagesArrayList() {
+        return raceStagesArrayList;
     }
 
     // Setters 
@@ -57,7 +75,18 @@ public class Race {
     public void setNumberOfStages(int numberOfStages) {
         this.numberOfStages = numberOfStages;
     }
-
+    public void setRaceStagesArrayList(ArrayList<Stage> raceStagesArrayList) {
+        this.raceStagesArrayList = raceStagesArrayList;
+    }
+    public void setStageArray(Stage[] stageArray) {
+        this.stageArray = stageArray;
+    }
     // Methods
+
+    public void addStage(Stage stage){
+        this.raceStagesArrayList.add(stage);
+    }
+
+    // add stages to
 
 }
