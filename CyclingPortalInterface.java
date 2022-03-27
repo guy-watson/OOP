@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 import java.time.LocalTime;
 

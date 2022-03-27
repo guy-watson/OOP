@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 /**
  * Each rider can only have a single result in a race. This exception is thrown

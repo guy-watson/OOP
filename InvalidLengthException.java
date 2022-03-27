@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 /**
  * Thrown when attempting to assign a race length null or less than 5 (kilometres).

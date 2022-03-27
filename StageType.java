@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 /**
  * This enum is used to represent the stage types  on road races.

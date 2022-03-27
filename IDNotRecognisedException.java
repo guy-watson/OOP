@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 /**
  * Thrown when attempting to use an ID that does not exit in the system.

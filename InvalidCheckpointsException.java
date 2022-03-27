@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 /**
  * Each race result should contains the times for each segment (mountain and

@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 public class stageSegment {
 // Attributes

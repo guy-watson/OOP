@@ -1,4 +1,4 @@
-package cycling;
+package Cycling;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

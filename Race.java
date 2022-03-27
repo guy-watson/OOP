@@ -57,9 +57,9 @@ public class Race {
         return stageArray;
     }
 
-    public ArrayList<Stage> getRaceStagesArrayList() {
-        return raceStagesArrayList;
-    }
+//    public ArrayList<Stage> getRaceStagesArrayList() {
+//        return raceStagesArrayList;
+//    }
 
     // Setters 
 
@@ -75,17 +75,17 @@ public class Race {
     public void setNumberOfStages(int numberOfStages) {
         this.numberOfStages = numberOfStages;
     }
-    public void setRaceStagesArrayList(ArrayList<Stage> raceStagesArrayList) {
-        this.raceStagesArrayList = raceStagesArrayList;
-    }
+//    public void setRaceStagesArrayList(ArrayList<Stage> raceStagesArrayList) {
+//        this.raceStagesArrayList = raceStagesArrayList;
+//    }
     public void setStageArray(Stage[] stageArray) {
         this.stageArray = stageArray;
     }
     // Methods
 
-    public void addStage(Stage stage){
-        this.raceStagesArrayList.add(stage);
-    }
+//    public void addStage(Stage stage){
+//        this.raceStagesArrayList.add(stage);
+//    }
 
     // add stages to
 
