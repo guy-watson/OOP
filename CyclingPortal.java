@@ -295,16 +295,19 @@ public class CyclingPortal implements CyclingPortalInterface {
 		}
 		return teamIdsArray;
 	}
-
+	
 	@Override
 	public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
 		// Need to create an array list of riders in a team
 		// does not work
-		int j = teamArrayList.size();
-		int[] teamIdsArray = new int[j];
-		for (int i=0;i<teamArrayList.size();i++) {
-			//teamIdsArray[i] = teamArrayList.get(i).getTeamId();
-			//teamIdsArray.add(i, teamArrayList.get(i).getTeamId())
+		int i = 0;
+		int teamSize = teamArrayList.size();
+		int[] teamIdsArray = new int[teamSize];
+		for (Rider rider : riderArrayList) {
+			if(rider.getTeamId() == teamId) {
+				teamIdsArray[i] = rider.getRiderId();
+				i++;
+			}
 		}
 		return teamIdsArray;
 	}
