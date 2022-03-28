@@ -21,7 +21,6 @@ public class CyclingPortal implements CyclingPortalInterface {
 	private final ArrayList<Team> teamArrayList;
 	private final ArrayList<Rider> riderArrayList;
 	private final ArrayList<Stage> stageArrayList;
-	private final ArrayList<Stage> raceStageArrayList;
 	
 	
 	//private final ArrayList<Stage> raceStagesArrayList;
@@ -122,40 +121,49 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
-		// --
-		if (stageName.length() >= 30) {
-			throw new InvalidNameException("The stage name is too long");
-		} if (stageName.isEmpty()) {
-			throw new InvalidNameException("The stage name is empty");
-		} if (stageName.trim().isEmpty()) {
-			throw new InvalidNameException("The stage name is empty");
-		}  if (stageName.contains(" ")) {
-			throw new InvalidNameException("The stage name contains a white space");
-		}
-		
-		for(Stage stage : stageArrayList) {
-			if(stageName.equals(stage.getStageName())) {
-				throw new IllegalNameException("A stage with that name already exists");
+		// -- needs more exceptions and testing
+
+		if(stageName.length() >= 30 || stageName.isEmpty() || stageName.trim().isEmpty() || stageName == null || stageName.contains(" ")) {
+					throw new InvalidNameException("That is an invalid name."); 	
 				}
+				for(Stage stage : stageArrayList) {
+					if(stageName.equals(stage.getStageName())) {
+						throw new IllegalNameException("A team with that name already exists");
+					}
+				}
+				Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
+				//puts stage in global array list with all stages
+				stageArrayList.add(newStage);
+				
+				for(Race race : raceArrayList) {
+					if(raceId == race.getRaceId()) {
+						Stage[] raceStages = race.getRaceStageArray();
+						int index = newStage.getStageId();
+						raceStages[index] = newStage;
+						//puts stage in the race it belongs to within the race class
+						race.setRaceStagesArray(raceStages);
+					}
+				}
+				
+				return newStage.getStageId();
+
 			}
-			
-		
-	
-		
-		Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
-		
-		
-		
-		return newStage.getStageId();
-
-
-		}
-
-
 
 	@Override
 	public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
 		// Needs testing
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		// Need to find the race of the race ID
 		// need to get the arraylist of stages from that race = "stageArrayList"
@@ -182,22 +190,14 @@ public class CyclingPortal implements CyclingPortalInterface {
 		// THIS DOES NOT WORK 
 		// Needs to throw exception
 		
+		double length = 0;
+		for(Stage stage : stageArrayList) {
+			if(stage.getStageId() == stageId) {
+				length = stage.getLength();
+			}
+		}
 		
-		
-		
-		
-		
-		
-		
-		
-		//double stageLength = 0;
-
-		
-		//for(int i = 0; i <= stageArrayList.size(); i++) {
-			//if(stageArrayList.get(i).getStageId() == stageId) { 
-				//stageLength = stageArrayList.get(i).getLength();
-			return 0.0;
-//			return stageLength;
+		return length;
 	}
 		
 		
@@ -205,7 +205,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public void removeStageById(int stageId) throws IDNotRecognisedException {
-		// needs testing
+		// needs testing **
 		int i = -1;
 		for(Stage stage : stageArrayList) {
 			if(stage.getStageId() == stageId){	
@@ -295,35 +295,33 @@ public class CyclingPortal implements CyclingPortalInterface {
 		}
 		return teamIdsArray;
 	}
-	
+
 	@Override
 	public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
-		// Need to create an array list of riders in a team
-		// does not work
+		// --
+		
+		
+		
+		
 		int i = 0;
-		int j = 0;
 		int teamSize = teamArrayList.size();
-		int[] teamIdsArray = new int[teamSize];
+		int[] teamRiderIdsArray = new int[teamSize];
 		// Need to sort out exception
 		// check if team exists
 		for (Team team : teamArrayList) {
 			if(team.getTeamId() == teamId) {
-				continue;
-		}else {
-			throw new IDNotRecognisedException("A team with that teamID does not exist.")
-		}
-			
-		
-		for (Rider rider : riderArrayList) {
-			if(rider.getTeamId() == teamId) {
-				teamIdsArray[i] = rider.getRiderId();
-				i++;
+				for(Rider rider : riderArrayList) {
+					if(rider.getTeamId() == teamId) {
+						teamRiderIdsArray[i] = rider.getRiderId();
+						i++; }
 				}
+		}else{
+			throw new IDNotRecognisedException("A team with that teamID does not exist.");
 			}
-		return teamIdsArray;
 		}
+		return teamRiderIdsArray;
 	}
-
+	
 	@Override
 	public int createRider(int teamId, String name, int yearOfBirth) throws IDNotRecognisedException, IllegalArgumentException {
 		// needs to throw exceptions
@@ -342,18 +340,18 @@ public class CyclingPortal implements CyclingPortalInterface {
 				throw new IDNotRecognisedException("That Team ID does not exist.");
 			}
 		}
-		Rider rider = new Rider(teamId, name, yearOfBirth);
-		riderArrayList.add(rider);
-		for(int i = 0; i < teamArrayList.size();i++) {
-			if(teamArrayList.get(i).getTeamId() == teamId){
-				//riderInTeamArrayList.add(rider);
-				// need to make the rider add to the array not sure how??
-			}
-		
-		
+		Rider newRider = new Rider(teamId, name, yearOfBirth);
+		riderArrayList.add(newRider);
+	
+		for(Team team : teamArrayList) {
+			if(team.getTeamId() == teamId){	
+				Rider[] list = team.getTeamRiders();
+				int index = newRider.getRiderId();
+				list[index] = newRider;
+				team.setTeamRiders(list);
+			} 
 		}
-		return rider.getRiderId();
-
+		return newRider.getRiderId();
 	}
 
 	@Override
@@ -504,7 +502,6 @@ public class CyclingPortal implements CyclingPortalInterface {
 		teamArrayList = new ArrayList<>();
 		riderArrayList = new ArrayList<>();
 		stageArrayList = new ArrayList<>();
-		raceStageArrayList = new ArrayList<>();
 		//stageArrayList = new ArrayList<>();
 	}
 
