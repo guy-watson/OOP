@@ -1,4 +1,4 @@
-package Cycling;
+package cycling;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,7 @@ public class Team {
   private String name;
   private String description;
   static int count = 0;
+  private Rider[] teamRiders = new Rider[1000];
   private Rider[] riderInTeamArrayList;
   /**
 		* Creates a team with name and description.
@@ -29,7 +30,7 @@ public class Team {
 
 
   Team(String name, String description) throws InvalidNameException, IllegalNameException {
-
+	  
     //if (teamArrayList.getAttribute(name).equals(name)) {
     //    throw IllegalNameException();
     //}
@@ -56,6 +57,14 @@ public class Team {
         return description;
     }  
     
+	public Rider[] getRiderInTeamArrayList() {
+		return riderInTeamArrayList;
+	}
+	public Rider[] getTeamRiders() {
+		return teamRiders;
+	}
+
+    
     // Setters 
     
     public void setTeamId(int teamId) {
@@ -66,5 +75,13 @@ public class Team {
     }
     public void setDescription(String description) {
         this.description = description;
-    } 
+    }
+
+	public void setRiderInTeamArrayList(Rider[] riderInTeamArrayList) {
+		this.riderInTeamArrayList = riderInTeamArrayList;
+	}
+
+	public void setTeamRiders(Rider[] teamRiders) {
+		this.teamRiders = teamRiders;
+	} 
 }
