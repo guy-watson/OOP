@@ -152,17 +152,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
 		// Needs testing
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		
 		// Need to find the race of the race ID
@@ -186,17 +176,20 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public double getStageLength(int stageId) throws IDNotRecognisedException {
-		// Needs testing
-		// THIS DOES NOT WORK 
-		// Needs to throw exception
-		
+		// WORKS
+		int count = 0;
+		int size = stageArrayList.size();
 		double length = 0;
 		for(Stage stage : stageArrayList) {
 			if(stage.getStageId() == stageId) {
 				length = stage.getLength();
+			} else {
+				count++;
+				if(count == size) {
+					throw new IDNotRecognisedException("A stage with that stage ID does not exist.");
+				}
 			}
 		}
-		
 		return length;
 	}
 		
@@ -299,14 +292,15 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
 		// --
-		int i = 0;
+		return null;
+	}
+		/*int i = 0;
 		int count = 0;
 		int size = teamArrayList.size();
 		int[] riderIdList = new int[1000];
 		for(Team team : teamArrayList) {
-			if(team.getTeamId() == teamId ) {
-				Rider[] riderlist = team.getTeamRiders();
-				for(Rider rider : riderlist) {
+			if(team.getTeamId() == teamId) {
+				for(Rider rider : team.getTeamRiders()) {
 					riderIdList[i] = rider.getRiderId();
 					i++;
 				}
@@ -318,7 +312,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 			}
 		}
 		return riderIdList;
-	}
+	} */
 	
 	@Override
 	public int createRider(int teamId, String name, int yearOfBirth) throws IDNotRecognisedException, IllegalArgumentException {
