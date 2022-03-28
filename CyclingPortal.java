@@ -301,15 +301,27 @@ public class CyclingPortal implements CyclingPortalInterface {
 		// Need to create an array list of riders in a team
 		// does not work
 		int i = 0;
+		int j = 0;
 		int teamSize = teamArrayList.size();
 		int[] teamIdsArray = new int[teamSize];
+		// Need to sort out exception
+		// check if team exists
+		for (Team team : teamArrayList) {
+			if(team.getTeamId() == teamId) {
+				continue;
+		}else {
+			throw new IDNotRecognisedException("A team with that teamID does not exist.")
+		}
+			
+		
 		for (Rider rider : riderArrayList) {
 			if(rider.getTeamId() == teamId) {
 				teamIdsArray[i] = rider.getRiderId();
 				i++;
+				}
 			}
-		}
 		return teamIdsArray;
+		}
 	}
 
 	@Override
