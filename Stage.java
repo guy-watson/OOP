@@ -1,6 +1,7 @@
 package cycling;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Stage {
 // Attributes
@@ -12,8 +13,8 @@ public class Stage {
     private LocalDateTime startTime;
     private StageType type;
     private static int count = 0;
-    
-    // private Double location;
+    private ArrayList<StageSegment> segmentStageList = new ArrayList<StageSegment>();
+    private Double location;
 
     public Stage(String stageName, String description, double length, int raceId, LocalDateTime startTime, StageType type) {
         // Needs testing
