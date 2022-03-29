@@ -10,7 +10,7 @@ public class Team {
   private String description;
   static int count = 0;
   private Rider[] teamRiders = new Rider[1000];
-  private Rider[] riderInTeamArrayList;
+
   /**
 		* Creates a team with name and description.
 		* <p>
@@ -34,7 +34,6 @@ public class Team {
     //if (teamArrayList.getAttribute(name).equals(name)) {
     //    throw IllegalNameException();
     //}
-  ArrayList<Rider> riderInTeamArrayList = new ArrayList<Rider>();
   this.name = name;
   this.description = description;
   count++;
@@ -56,10 +55,6 @@ public class Team {
     public String getDescription() {
         return description;
     }  
-    
-	public Rider[] getRiderInTeamArrayList() {
-		return riderInTeamArrayList;
-	}
 	public Rider[] getTeamRiders() {
 		return teamRiders;
 	}
@@ -76,11 +71,7 @@ public class Team {
     public void setDescription(String description) {
         this.description = description;
     }
-
-	public void setRiderInTeamArrayList(Rider[] riderInTeamArrayList) {
-		this.riderInTeamArrayList = riderInTeamArrayList;
-	}
-
+    
 	public void setTeamRiders(Rider[] teamRiders) {
 		this.teamRiders = teamRiders;
 	} 
