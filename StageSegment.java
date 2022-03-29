@@ -1,6 +1,6 @@
-package Cycling;
+package cycling;
 
-public class stageSegment {
+public class StageSegment {
 // Attributes
 
     private int segmentId;
