@@ -15,7 +15,6 @@ public class Race {
     private double totalLength;
     //private Stage[] stageArray = new Stage[1000];
     private List<Stage> raceStageList = new ArrayList<Stage>();
-    private Stage[] raceStageArray = new Stage[1000];
     //raceStageArrayList is an array that contains stages for each individual race object
     //private final ArrayList<Stage> raceStageArrayList;
     private static int count = 0;
@@ -56,10 +55,6 @@ public class Race {
     public double getTotalLength() {
         return totalLength;
     }
-
-    public Stage[] getRaceStageArray() {
-    	return raceStageArray;
-    }
     
     public List<Stage> getRaceStageList() {
     	return raceStageList;
@@ -85,11 +80,7 @@ public class Race {
 //    public void setRaceStagesArrayList(ArrayList<Stage> raceStagesArrayList) {
 //        this.raceStagesArrayList = raceStagesArrayList;
 //    }
-    
-    public void setRaceStagesArray(Stage[] raceStageArray) {
-        this.raceStageArray = raceStageArray;
-    } 
-    
+
     public void setRaceStageList(List<Stage> raceStageList) {
     	this.raceStageList = raceStageList;
     }
