@@ -1,6 +1,7 @@
 package cycling;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Team {
 // Attributes 
@@ -9,6 +10,7 @@ public class Team {
   private String name;
   private String description;
   static int count = 0;
+  private List<Rider> teamRidersList = new ArrayList<Rider>();
   private Rider[] teamRiders = new Rider[1000];
 
   /**
@@ -58,7 +60,9 @@ public class Team {
 	public Rider[] getTeamRiders() {
 		return teamRiders;
 	}
-
+	public List<Rider> getTeamRidersList() {
+		return teamRidersList;
+	}
     
     // Setters 
     
@@ -75,4 +79,8 @@ public class Team {
 	public void setTeamRiders(Rider[] teamRiders) {
 		this.teamRiders = teamRiders;
 	} 
+	
+	public void setTeamRidersList(List<Rider> teamRidersList) {
+		this.teamRidersList = teamRidersList;
+	}
 }
