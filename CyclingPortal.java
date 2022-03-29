@@ -232,7 +232,27 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public void removeStageById(int stageId) throws IDNotRecognisedException {
 		// needs testing **
-		int i = -1;
+		int rid = 0;
+		for(Stage stage : stageArrayList) {
+			if(stage.getStageId() == stageId) {
+				rid = stage.getRaceId();
+				stageArrayList.remove(stage);
+				System.out.println(rid);
+			}
+		}
+		
+		for(Race race : raceArrayList) {
+			if(race.getRaceId() == rid) {
+				System.out.println("happy days");
+			}
+		}
+	}
+		
+		
+		
+		
+		
+		/*int i = -1;
 		for(Stage stage : stageArrayList) {
 			if(stage.getStageId() == stageId){	
 				i = stageArrayList.indexOf(stage);
@@ -244,7 +264,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 		}
 		if(i > 0)
 		stageArrayList.remove(i);
-	}
+	}*/
 			
 
 	@Override
