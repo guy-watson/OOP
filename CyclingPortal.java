@@ -105,6 +105,17 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public int getNumberOfStages(int raceId) throws IDNotRecognisedException {
 		// --
+		for(Race race : raceArrayList) {
+			if(race.getRaceId() == raceId) {
+				List<Stage> temp = race.getRaceStageList();
+				int length = ((CharSequence) temp).length();
+				return length;
+			}
+		}
+		
+		
+		
+		
 		if(raceId > raceArrayList.size()){
 			throw new IDNotRecognisedException("That Race ID does not exist.");
 		}
@@ -118,7 +129,6 @@ public class CyclingPortal implements CyclingPortalInterface {
 			}
 		return numOfStages;
 		}
-		
 
 	@Override
 	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
