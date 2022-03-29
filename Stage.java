@@ -1,4 +1,4 @@
-package Cycling;
+package cycling;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +27,7 @@ public class Stage {
         count++;
         stageId = count;
     }
+
     
     // Getters
 
@@ -35,9 +36,10 @@ public class Stage {
     }
 
     public String getDescription() {
+
         return description;
     }
-
+    
     public double getLength() {
         return length;
     }
