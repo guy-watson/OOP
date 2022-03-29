@@ -27,8 +27,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 	//private final ArrayList<Stage> raceStagesArrayList;
 
 	@Override
-	public int[] getRaceIds() 
-	{
+	public int[] getRaceIds() {
 		// WORKS
 		
 		int j = raceArrayList.size();
@@ -104,7 +103,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int getNumberOfStages(int raceId) throws IDNotRecognisedException {
-		// WORKS -- needs exception
+		// WORKS 
 		
 		int count = 0;
 		int size = raceArrayList.size();
@@ -116,153 +115,132 @@ public class CyclingPortal implements CyclingPortalInterface {
 			}else{
 				count++;
 				if(count == size) {
-					throw new IDNotRecognisedException("A team with that team ID does not exist.");
+					throw new IDNotRecognisedException("A race with that race ID does not exist.");
 				}
 			}
 		}
 		return length;
 	}
-		
+			
 
-	@Override
-	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
-		// WORKS
-		int count = 0;
-		int size = raceArrayList.size();
-		if(stageName.length() >= 30 || stageName.isEmpty() || stageName.trim().isEmpty() || stageName == null || stageName.contains(" ")) {
-			throw new InvalidNameException("That is an invalid name.");
-		}
-		//dont know what a null double is *********
-		if(length < 5) {
-			throw new InvalidLengthException("The length is is null or less than 5km");
+		@Override
+		public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
+			// WORKS
+			int count = 0;
+			int size = raceArrayList.size();
+			if(stageName.length() >= 30 || stageName.isEmpty() || stageName.trim().isEmpty() || stageName == null || stageName.contains(" ")) {
+						throw new InvalidNameException("That is an invalid name.");
+			}
+			//dont know what a null double is *********
+			if(length < 5) {
+				throw new InvalidLengthException("The length is is null or less than 5km");
 				
 			}
+					for(Stage stage : stageArrayList) {
+						if(stageName.equals(stage.getStageName())) {
+							throw new IllegalNameException("A stage with that name already exists");
+							}
+						}
+
+					Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
+					//puts stage in global array list with all stages
+					stageArrayList.add(newStage);
+					// puts stage in the race object attribute
+					for(Race race : raceArrayList) {
+						if(raceId == race.getRaceId()) {
+							List<Stage> tempList = race.getRaceStageList();
+							tempList.add(newStage);
+							race.setRaceStageList(tempList);
+						}else {
+							count++;
+							if(count == size) {
+								throw new IDNotRecognisedException("A race with that race ID does not exist.");
+							}
+						}
+					}
+
+					return newStage.getStageId();
+				}
+
+		@Override
+		public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
+			// WORKS
+
+			int count = 0;
+			int size = raceArrayList.size();
+			int i = 0;
+			int[] stageArray = new int[100];
+			for(Race race : raceArrayList) {
+				if(race.getRaceId() == raceId) {
+					for(Stage stage : race.getRaceStageList() ) {
+						stageArray[i] = stage.getStageId();
+						i++;
+					}
+				}else {
+					count++;
+					if(count == size) {
+						throw new IDNotRecognisedException("A race with that race ID does not exist");
+					}
+				}
+			}
+			return stageArray;
+		}
+
+
+		@Override
+		public double getStageLength(int stageId) throws IDNotRecognisedException {
+			// WORKS
+		
+			int count = 0;
+			int size = stageArrayList.size();
+			double length = 0;
 			for(Stage stage : stageArrayList) {
-					if(stageName.equals(stage.getStageName())) {
-						throw new IllegalNameException("A stage with that name already exists");
-						}
-					}
-
-				Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
-				//puts stage in global array list with all stages
-				stageArrayList.add(newStage);
-				// puts stage in the race object attribute
-				for(Race race : raceArrayList) {
-					if(raceId == race.getRaceId()) {
-						List<Stage> tempList = race.getRaceStageList();
-						tempList.add(newStage);
-						race.setRaceStageList(tempList);
-					}else {
-						count++;
-						if(count == size) {
-							throw new IDNotRecognisedException("A race with that race ID does not exist.");
-						}
+				if(stage.getStageId() == stageId) {
+					length = stage.getLength();
+				} else {
+					count++;
+					if(count == size) {
+						throw new IDNotRecognisedException("A stage with that stage ID does not exist.");
 					}
 				}
-
-				return newStage.getStageId();
 			}
-
-	@Override
-	public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
-		// Needs testing
-
-		int count = 0;
-		int size = raceArrayList.size();
-		int i = 0;
-		int[] stageArray = new int[100];
-		for(Race race : raceArrayList) {
-			if(race.getRaceId() == raceId) {
-				for(Stage stage : race.getRaceStageList() ) {
-					stageArray[i] = stage.getStageId();
-					i++;
-				}
-			}else {
-				count++;
-				if(count == size) {
-					throw new IDNotRecognisedException("A race with that race ID does not exist");
-				}
-			}
+			return length;
 		}
-		return stageArray;
-	}
-		// Need to find the race of the race ID
-		// need to get the arraylist of stages from that race = "stageArrayList"
-		// turn that array list into an array and return
-		
-//		if(raceId > raceArrayList.size()){
-//			throw new IDNotRecognisedException("That Race ID does not exist.");
-//		}
-//		Stage[] raceStages = new Stage[1000];
-//		for(int i = 0; i < raceArrayList.size(); i++) {
-//			if(raceArrayList.get(i).getRaceId() == raceId){
-//				raceStages = stageArray[i].getStageArray();
-//			}					
-//		}
-//	return raceStagesIDList;
-
 		
 	
 
-
-	@Override
-	public double getStageLength(int stageId) throws IDNotRecognisedException {
-		// WORKS
-		int count = 0;
-		int size = stageArrayList.size();
-		double length = 0;
-		for(Stage stage : stageArrayList) {
-			if(stage.getStageId() == stageId) {
-				length = stage.getLength();
-			} else {
-				count++;
-				if(count == size) {
-					throw new IDNotRecognisedException("A stage with that stage ID does not exist.");
+		@Override
+		public void removeStageById(int stageId) throws IDNotRecognisedException {
+			// needs testing **
+			int rid = 0;
+			for(Stage stage : stageArrayList) {
+				if(stage.getStageId() == stageId) {
+					rid = stage.getRaceId();
+					stageArrayList.remove(stage);
+					System.out.println(rid);
+				}
+			}
+			
+			for(Race race : raceArrayList) {
+				if(race.getRaceId() == rid) {
+					System.out.println("happy days");
 				}
 			}
 		}
-		return length;
-	}
-		
-		
 	
-
-	@Override
-	public void removeStageById(int stageId) throws IDNotRecognisedException {
-		// needs testing **
-		int rid = 0;
-		for(Stage stage : stageArrayList) {
-			if(stage.getStageId() == stageId) {
-				rid = stage.getRaceId();
-				stageArrayList.remove(stage);
-				System.out.println(rid);
-			}
-		}
-		
-		for(Race race : raceArrayList) {
-			if(race.getRaceId() == rid) {
-				System.out.println("happy days");
-			}
-		}
-	}
-		
-		
-		
-		
-		
-		/*int i = -1;
-		for(Stage stage : stageArrayList) {
-			if(stage.getStageId() == stageId){	
-				i = stageArrayList.indexOf(stage);
-			} else {
-				if(i == -1) {
-					throw new IDNotRecognisedException("A stage with that stageID does not exist. ");
+			/*int i = -1;
+			for(Stage stage : stageArrayList) {
+				if(stage.getStageId() == stageId){	
+					i = stageArrayList.indexOf(stage);
+				} else {
+					if(i == -1) {
+						throw new IDNotRecognisedException("A stage with that stageID does not exist. ");
+					}
 				}
 			}
-		}
-		if(i > 0)
-		stageArrayList.remove(i);
-	}*/
+			if(i > 0)
+			stageArrayList.remove(i);
+		}*/
 			
 
 	@Override
@@ -403,6 +381,17 @@ public class CyclingPortal implements CyclingPortalInterface {
 	public void removeRider(int riderId) throws IDNotRecognisedException {
 		// Needs testing
 		// Needs to remove results and update race results as well
+	
+		for(Rider rider : riderArrayList) {
+			if(rider.getRiderId() == riderId) {
+				riderArrayList.remove(rider);
+		
+		
+				}
+			}
+		}
+		
+		/*
 		for(int i = 0; i <= riderArrayList.size(); i++) {
 			if(riderArrayList.get(i).getRiderId() == riderId){
 				riderArrayList.remove(i);
@@ -413,6 +402,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 		}
 
 	}
+	*/
 
 	@Override
 	public void registerRiderResultsInStage(int stageId, int riderId, LocalTime... checkpoints)
@@ -485,17 +475,8 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public void removeRaceByName(String name) throws NameNotRecognisedException {
-		// Works
-		// Exception DOES NOT WORK
-		// Need to make sure removing segments, results and stages as well
-		//for(int i = 0; i < raceArrayList.size(); i++) {
-		//	if(raceArrayList.get(i).getName() == name){
-		//		raceArrayList.remove(i);
-		//	if(i == raceArrayList.size()){
-			//	throw new NameNotRecognisedException("A race with that name does not exist.");
-			//}
-		//}
-	//}
+		// WORKS
+		
 		for(int i = 0; i < raceArrayList.size(); i++) {
 			if(raceArrayList.get(i).getName() == name){
 				raceArrayList.remove(i);
