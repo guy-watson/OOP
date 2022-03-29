@@ -317,24 +317,23 @@ public class CyclingPortal implements CyclingPortalInterface {
 		if(yearOfBirth < 1900){
 			throw new IllegalArgumentException("That age is invalid.");
 		}
-		for(int i = 0; i < teamArrayList.size(); i++) {
+		/*for(int i = 0; i < teamArrayList.size(); i++) {
 			if(teamArrayList.get(i).getTeamId() == teamId) {
 				break;
 			}
 			if(i == teamArrayList.size()) {
 				throw new IDNotRecognisedException("That Team ID does not exist.");
 			}
-		}
+		}*/
 		Rider newRider = new Rider(teamId, name, yearOfBirth);
 		riderArrayList.add(newRider);
 	
 		for(Team team : teamArrayList) {
-			if(team.getTeamId() == teamId){	
-				Rider[] list = team.getTeamRiders();
-				int index = newRider.getRiderId();
-				list[index] = newRider;
-				team.setTeamRiders(list);
-			} 
+			if(team.getTeamId() == teamId) {
+				List<Rider> riderList = team.getTeamRidersList();
+				riderList.add(newRider);
+				team.setTeamRidersList(riderList);
+			}
 		}
 		return newRider.getRiderId();
 	}
