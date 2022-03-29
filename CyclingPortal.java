@@ -106,11 +106,18 @@ public class CyclingPortal implements CyclingPortalInterface {
 	public int getNumberOfStages(int raceId) throws IDNotRecognisedException {
 		// WORKS -- needs exception
 		
+		int count = 0;
+		int size = raceArrayList.size();
 		int length = 0;
 		for(Race race : raceArrayList) {
 			if(race.getRaceId() == raceId) {
 				List<Stage> temp = race.getRaceStageList();
 				length = temp.size();
+			}else{
+				count++;
+				if(count == size) {
+					throw new IDNotRecognisedException("A team with that team ID does not exist.");
+				}
 			}
 		}
 		return length;
