@@ -161,8 +161,25 @@ public class CyclingPortal implements CyclingPortalInterface {
 	public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
 		// Needs testing
 
-		
-		
+		int count = 0;
+		int size = raceArrayList.size();
+		int i = 0;
+		int[] stageArray = new int[100];
+		for(Race race : raceArrayList) {
+			if(race.getRaceId() == raceId) {
+				for(Stage stage : race.getRaceStageList() ) {
+					stageArray[i] = stage.getStageId();
+					i++;
+				}
+			}else {
+				count++;
+				if(count == size) {
+					throw new IDNotRecognisedException("A race with that race ID does not exist");
+				}
+			}
+		}
+		return stageArray;
+	}
 		// Need to find the race of the race ID
 		// need to get the arraylist of stages from that race = "stageArrayList"
 		// turn that array list into an array and return
@@ -177,9 +194,9 @@ public class CyclingPortal implements CyclingPortalInterface {
 //			}					
 //		}
 //	return raceStagesIDList;
-	return null;
-	}
+
 		
+	
 
 
 	@Override
