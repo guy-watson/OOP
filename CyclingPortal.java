@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * BadCyclingPortal is a minimally compiling, but non-functioning implementor
@@ -122,15 +123,22 @@ public class CyclingPortal implements CyclingPortalInterface {
 	@Override
 	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
 		// -- needs more exceptions and testing
-
+		
 		if(stageName.length() >= 30 || stageName.isEmpty() || stageName.trim().isEmpty() || stageName == null || stageName.contains(" ")) {
-					throw new InvalidNameException("That is an invalid name."); 	
-				}
+					throw new InvalidNameException("That is an invalid name.");
+		}
+		//dont know what a null double is *********
+		if(length < 5) {
+			throw new InvalidLengthException("The length is is null or less than 5km");
+			
+		}
 				for(Stage stage : stageArrayList) {
 					if(stageName.equals(stage.getStageName())) {
-						throw new IllegalNameException("A team with that name already exists");
+						throw new IllegalNameException("A stage with that name already exists");
+						}
 					}
-				}
+
+				
 				Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
 				//puts stage in global array list with all stages
 				stageArrayList.add(newStage);
@@ -247,7 +255,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int createTeam(String name, String description) throws IllegalNameException, InvalidNameException {
-		// WORKS -- add illegal exception
+		// WORKS
 		if (name.length() >= 30) {
 			throw new InvalidNameException("The name is too long");
 		} if (name.isEmpty()) {
@@ -257,9 +265,12 @@ public class CyclingPortal implements CyclingPortalInterface {
 		}  if (name.contains(" ")) {
 			throw new InvalidNameException("The name contains a white space");
 		} 
-		//if (teamArrayList.contains()) {
-		//	throw new IllegalNameException();
-		//} 
+		for(Team team : teamArrayList) {
+			if(name.equals(team.getName())) {
+				throw new IllegalNameException("A team with that name already exists");
+			}
+		}
+
 		Team team = new Team(name, description);
 		teamArrayList.add(team);
 		return team.getTeamId();
@@ -291,21 +302,29 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
-		// --
-		// get the array of riders in a team
-		// extract the 
+		// Works need to do exception
+		int count = 0;
+		int size = teamArrayList.size();
 		int i = 0;
+		int[] riderArray = new int[100];
 		for(Team team : teamArrayList) {
 			if(team.getTeamId() == teamId) {
-				int[] riderArray = new int[team.getTeamRidersList().size()];
-				// riderArray is the array which will be returned 
 				for(Rider rider : team.getTeamRidersList()) {
-					System.out.println(rider.getRiderId());
+					//System.out.println(rider.getRiderId());
+					riderArray[i] = rider.getRiderId();
+					System.out.println(riderArray[i]);
+					i++;
+				}
+				}else{
+					count++;
+					if(count == size) {
+						throw new IDNotRecognisedException("A team with that team ID does not exist.");
+					}
 				}
 			}
+			return riderArray;
 		}
-		return null;
-	}
+
 	
 	@Override
 	public int createRider(int teamId, String name, int yearOfBirth) throws IDNotRecognisedException, IllegalArgumentException {
