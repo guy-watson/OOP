@@ -1,4 +1,4 @@
-package Cycling;
+package cycling;
 
 import java.util.ArrayList;
 
