@@ -132,23 +132,23 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
-		// -- ID EXCEPTION NEEDED AND testing
-		
+		// WORKS
+		int count = 0;
+		int size = raceArrayList.size();
 		if(stageName.length() >= 30 || stageName.isEmpty() || stageName.trim().isEmpty() || stageName == null || stageName.contains(" ")) {
-					throw new InvalidNameException("That is an invalid name.");
+			throw new InvalidNameException("That is an invalid name.");
 		}
 		//dont know what a null double is *********
 		if(length < 5) {
 			throw new InvalidLengthException("The length is is null or less than 5km");
-			
-		}
-				for(Stage stage : stageArrayList) {
+				
+			}
+			for(Stage stage : stageArrayList) {
 					if(stageName.equals(stage.getStageName())) {
 						throw new IllegalNameException("A stage with that name already exists");
 						}
 					}
 
-				
 				Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
 				//puts stage in global array list with all stages
 				stageArrayList.add(newStage);
@@ -158,21 +158,15 @@ public class CyclingPortal implements CyclingPortalInterface {
 						List<Stage> tempList = race.getRaceStageList();
 						tempList.add(newStage);
 						race.setRaceStageList(tempList);
+					}else {
+						count++;
+						if(count == size) {
+							throw new IDNotRecognisedException("A race with that race ID does not exist.");
+						}
 					}
 				}
-				
-				/*for(Race race : raceArrayList) {
-					if(raceId == race.getRaceId()) {
-						Stage[] raceStages = race.getRaceStageArray();
-						int index = newStage.getStageId();
-						raceStages[index] = newStage;
-						//puts stage in the race it belongs to within the race class
-						race.setRaceStagesArray(raceStages);
-					}
-				}*/
-				
-				return newStage.getStageId();
 
+				return newStage.getStageId();
 			}
 
 	@Override
