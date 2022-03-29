@@ -1,4 +1,4 @@
-package Cycling;
+package cycling;
 
 import java.util.ArrayList;
 // We need to create an array of raceIds
@@ -12,8 +12,10 @@ public class Race {
     private int raceId;
     private int numberOfStages;
     private double totalLength;
-    private Stage[] stageArray = new Stage[1000];
-    private Stage[] raceStagesArrayList;
+    //private Stage[] stageArray = new Stage[1000];
+    private Stage[] raceStageArray = new Stage[1000];
+    //raceStageArrayList is an array that contains stages for each individual race object
+    //private final ArrayList<Stage> raceStageArrayList;
     private static int count = 0;
     
     Race(String name, String description) {
@@ -53,10 +55,9 @@ public class Race {
         return totalLength;
     }
 
-    public Stage[] getStageArray() {
-        return stageArray;
+    public Stage[] getRaceStageArray() {
+    	return raceStageArray;
     }
-
 //    public ArrayList<Stage> getRaceStagesArrayList() {
 //        return raceStagesArrayList;
 //    }
@@ -78,9 +79,11 @@ public class Race {
 //    public void setRaceStagesArrayList(ArrayList<Stage> raceStagesArrayList) {
 //        this.raceStagesArrayList = raceStagesArrayList;
 //    }
-    public void setStageArray(Stage[] stageArray) {
-        this.stageArray = stageArray;
-    }
+    
+    public void setRaceStagesArray(Stage[] raceStageArray) {
+        this.raceStageArray = raceStageArray;
+    } 
+    
     // Methods
 
 //    public void addStage(Stage stage){
