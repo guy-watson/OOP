@@ -142,8 +142,16 @@ public class CyclingPortal implements CyclingPortalInterface {
 				Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
 				//puts stage in global array list with all stages
 				stageArrayList.add(newStage);
-				
+				// puts stage in the race object attribute
 				for(Race race : raceArrayList) {
+					if(raceId == race.getRaceId()) {
+						List<Stage> tempList = race.getRaceStageList();
+						tempList.add(newStage);
+						race.setRaceStageList(tempList);
+					}
+				}
+				
+				/*for(Race race : raceArrayList) {
 					if(raceId == race.getRaceId()) {
 						Stage[] raceStages = race.getRaceStageArray();
 						int index = newStage.getStageId();
@@ -151,7 +159,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 						//puts stage in the race it belongs to within the race class
 						race.setRaceStagesArray(raceStages);
 					}
-				}
+				}*/
 				
 				return newStage.getStageId();
 
