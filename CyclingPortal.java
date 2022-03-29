@@ -122,7 +122,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
-		// -- needs more exceptions and testing
+		// -- ID EXCEPTION NEEDED AND testing
 		
 		if(stageName.length() >= 30 || stageName.isEmpty() || stageName.trim().isEmpty() || stageName == null || stageName.contains(" ")) {
 					throw new InvalidNameException("That is an invalid name.");
@@ -302,7 +302,7 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 	@Override
 	public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
-		// Works need to do exception
+		// WORKS
 		int count = 0;
 		int size = teamArrayList.size();
 		int i = 0;
@@ -310,7 +310,6 @@ public class CyclingPortal implements CyclingPortalInterface {
 		for(Team team : teamArrayList) {
 			if(team.getTeamId() == teamId) {
 				for(Rider rider : team.getTeamRidersList()) {
-					//System.out.println(rider.getRiderId());
 					riderArray[i] = rider.getRiderId();
 					System.out.println(riderArray[i]);
 					i++;
@@ -328,32 +327,32 @@ public class CyclingPortal implements CyclingPortalInterface {
 	
 	@Override
 	public int createRider(int teamId, String name, int yearOfBirth) throws IDNotRecognisedException, IllegalArgumentException {
-		// needs to throw exceptions
-		// needs testing
+		// WORKS
 		if(name == null){
 			throw new IllegalArgumentException("The name is null.");
 		}
 		if(yearOfBirth < 1900){
 			throw new IllegalArgumentException("That age is invalid.");
 		}
-		/*for(int i = 0; i < teamArrayList.size(); i++) {
-			if(teamArrayList.get(i).getTeamId() == teamId) {
-				break;
-			}
-			if(i == teamArrayList.size()) {
-				throw new IDNotRecognisedException("That Team ID does not exist.");
-			}
-		}*/
+		
 		Rider newRider = new Rider(teamId, name, yearOfBirth);
 		riderArrayList.add(newRider);
-	
+		int count = 0;
+		int size = teamArrayList.size();
 		for(Team team : teamArrayList) {
 			if(team.getTeamId() == teamId) {
 				List<Rider> riderList = team.getTeamRidersList();
 				riderList.add(newRider);
 				team.setTeamRidersList(riderList);
+			}else{
+				count++;
+				if(count == size) {
+					throw new IDNotRecognisedException("A team with that team ID does not exist.");
+				}
 			}
+			
 		}
+		
 		return newRider.getRiderId();
 	}
 
