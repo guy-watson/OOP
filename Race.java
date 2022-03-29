@@ -1,6 +1,7 @@
 package cycling;
 
 import java.util.ArrayList;
+import java.util.List;
 // We need to create an array of raceIds
 // Each time a new race is created a unique race id will be generated and we need to add this to the array
 // The array will start off as an arraylist so the size can be changed and then turned back into an array so it can be called from the portal
@@ -13,6 +14,7 @@ public class Race {
     private int numberOfStages;
     private double totalLength;
     //private Stage[] stageArray = new Stage[1000];
+    private List<Stage> raceStageList = new ArrayList<Stage>();
     private Stage[] raceStageArray = new Stage[1000];
     //raceStageArrayList is an array that contains stages for each individual race object
     //private final ArrayList<Stage> raceStageArrayList;
@@ -58,6 +60,10 @@ public class Race {
     public Stage[] getRaceStageArray() {
     	return raceStageArray;
     }
+    
+    public List<Stage> getRaceStageList() {
+    	return raceStageList;
+    }
 //    public ArrayList<Stage> getRaceStagesArrayList() {
 //        return raceStagesArrayList;
 //    }
@@ -83,6 +89,10 @@ public class Race {
     public void setRaceStagesArray(Stage[] raceStageArray) {
         this.raceStageArray = raceStageArray;
     } 
+    
+    public void setRaceStageList(List<Stage> raceStageList) {
+    	this.raceStageList = raceStageList;
+    }
     
     // Methods
 
