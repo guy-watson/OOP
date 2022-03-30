@@ -4,6 +4,7 @@ public class StageSegment {
 // Attributes
 
     private int segmentId;
+    private int stageId;
     private SegmentType type;
     private double averageGradient;
     private double length;
@@ -12,6 +13,10 @@ public class StageSegment {
     
     public int getSegmentId() {
         return segmentId;
+    }
+    
+    public int getStageId() {
+    	return stageId;
     }
 
     public SegmentType getType() {
@@ -31,6 +36,9 @@ public class StageSegment {
     public void setSegmentId(int segmentId) {
         this.segmentId = segmentId;
     } 
+    public void setStageId(int stageId) {
+    	this.stageId = stageId;
+    }
     public void setType(SegmentType type) {
         this.type = type;
     }
