@@ -164,28 +164,38 @@ public class CyclingPortal implements CyclingPortalInterface {
 
 		@Override
 		public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
-			// WORKS
+		    // WORKS
 
-			int count = 0;
-			int size = raceArrayList.size();
-			int i = 0;
-			int[] stageArray = new int[100];
-			for(Race race : raceArrayList) {
-				if(race.getRaceId() == raceId) {
-					for(Stage stage : race.getRaceStageList() ) {
-						stageArray[i] = stage.getStageId();
-						i++;
-					}
-				}else {
-					count++;
-					if(count == size) {
-						throw new IDNotRecognisedException("A race with that race ID does not exist");
-					}
-				}
+		    int count = 0;
+		    int size = raceArrayList.size();
+		    //int i = 0;
+		    List<Integer> tempStageArrayList = new ArrayList<Integer>();
+		    //int[] stageArray = new int[100];
+		    for(Race race : raceArrayList) {
+			if(race.getRaceId() == raceId) {
+			    for(Stage stage : race.getRaceStageList() ) {
+				tempStageArrayList.add(stage.getStageId());
+				//stageArray[i] = stage.getStageId();
+				//i++;
+			    }
+			}else {
+			    count++;
+			    if(count == size) {
+				throw new IDNotRecognisedException("A race with that race ID does not exist");
+			    }
 			}
-			return stageArray;
-		}
+		    }
+		    Object[] stageArrayObject = new Object[tempStageArrayList.size()];
+		    stageArrayObject = tempStageArrayList.toArray();
+		    int[] stageArrayInteger = new int[stageArrayObject.length];
+		    for(int i = 0; i<stageArrayObject.length;i++) {
+			stageArrayInteger[i]=(int)stageArrayObject[i];
+		    }
 
+
+            //int[] stageArrayInteger = Arrays.asList(stageArrayObject).toArray(new Integer[0]);
+            return stageArrayInteger;
+        }
 
 		@Override
 		public double getStageLength(int stageId) throws IDNotRecognisedException {
