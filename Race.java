@@ -8,8 +8,9 @@ import java.util.List;
  * 
  * Race is an object class that contains the constructor, attributes, methods, getters and setters for the race object. 
  *<p>
- *	
- *	
+ *Race contains the name, description, raceId, number of stages, total length of the stages in the race and also every 
+ *stage object within the race. The class contains a constructor to create race objects as well as getters, setters and 
+ *methods for the objects attribute. 	
  *<p>
  * 
  *
