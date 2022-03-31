@@ -24,7 +24,7 @@ public class Race {
     private int numberOfStages; // number of stages in the race
     private double totalLength; // total length of all stages in the race
     //private Stage[] stageArray = new Stage[1000];
-    private List<Stage> raceStageList = new ArrayList<Stage>(); //List containing all of the stages in the race object
+    private List<Stage> raceStageList = new ArrayList<>(); //List containing all of the stages in the race object
     //raceStageArrayList is an array that contains stages for each individual race object
     //private final ArrayList<Stage> raceStageArrayList;
     private static int count = 0; // count allows each rider to have an incrementing id
