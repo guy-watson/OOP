@@ -83,7 +83,7 @@ public class Race {
 
     /**
      * Gets the total length of all stages in a race
-     * @return An integer that is the sum of all the stage lengths in the race
+     * @return A double that is the sum of all the stage lengths in the race
      */
     public double getTotalLength() {
         return totalLength;
@@ -139,4 +139,11 @@ public class Race {
         this.raceStageList = raceStageList;
     }
 
+	/**
+     * Sets the total length
+     * @param totalLength A double that is the sum of all the stage lengths in the race
+     */
+	public void setTotalLength(double totalLength) {
+        this.totalLength = totalLength;
+    }
 }
