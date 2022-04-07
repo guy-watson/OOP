@@ -1,9 +1,5 @@
 package cycling;
 
-
-
-
-
 /**
  *<h1>Rider is a public class that holds the rider object information.</h1>
  * 
