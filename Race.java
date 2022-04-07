@@ -39,8 +39,6 @@ public class Race {
      * @param description The description of the race
      */
     public Race(String name, String description) {
-        // Needs testing
-        // Need to add race to race array list
         this.name = name;
         this.description = description;
         count++;
