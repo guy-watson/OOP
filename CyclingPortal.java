@@ -14,10 +14,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 /*
- * BadCyclingPortal is a minimally compiling, but non-functioning implementor
- * of the CyclingPortalInterface interface.
- * 
- * @author Diogo Pacheco
+ * @authors Guy Watson and Alex Gulliver
  * @version 1.0
  *
  */
@@ -39,8 +36,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int[] getRaceIds() {
-        // WORKS
-
         int j = raceArrayList.size();
         int[] raceIdsArray = new int[j];
 
@@ -62,8 +57,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int createRace(String name, String description) throws IllegalNameException, InvalidNameException {
-        // WORKS
-
         if (name.length() >= 30 || name.isEmpty() || name.trim().isEmpty() || name.contains(" ")) {
             throw new InvalidNameException("That is an invalid name.");
         }
@@ -88,7 +81,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public String viewRaceDetails(int raceId) throws IDNotRecognisedException {
-        // WORKS
         String output = null;
         int count = 0;
         int size = raceArrayList.size();
@@ -118,7 +110,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public void removeRaceById(int raceId) throws IDNotRecognisedException {
-        // WORKS
         int count = 0;
         int size = raceArrayList.size();
         for (Race race: raceArrayList) {
@@ -143,8 +134,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int getNumberOfStages(int raceId) throws IDNotRecognisedException {
-        // WORKS 
-
         int count = 0;
         int size = raceArrayList.size();
         int length = 0;
@@ -179,7 +168,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime, StageType type) throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
-        // WORKS
         int count = 0;
         int size = raceArrayList.size();
         if (stageName.length() >= 30 || stageName.isEmpty() || stageName.trim().isEmpty() || stageName.contains(" ")) {
@@ -196,8 +184,6 @@ public class CyclingPortal implements CyclingPortalInterface {
             }
         }
 
-        // need to get total length from length entered in added onto length from segments
-        //int inputLength = 
         Stage newStage = new Stage(stageName, description, length, raceId, startTime, type);
         //puts stage in global array list with all stages
         stageArrayList.add(newStage);
@@ -230,12 +216,10 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
-        // WORKS
         int count = 0;
         int size = raceArrayList.size();
         // Temporary array list used to store stage IDs
         List < Integer > tempStageArrayList = new ArrayList < > ();
-
         // Iterates through global race array list to find race with corresponding race id and adds the stage id's of the stages in that race
         for (Race race: raceArrayList) {
             if (race.getRaceId() == raceId) {
@@ -272,8 +256,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public double getStageLength(int stageId) throws IDNotRecognisedException {
-        // WORKS
-
         int count = 0;
         int size = stageArrayList.size();
         double length = 0;
@@ -298,7 +280,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public void removeStageById(int stageId) throws IDNotRecognisedException {
-        // WORKS
         int foundRaceId = 0;
         for (Stage stage: stageArrayList) {
             if (stage.getStageId() == stageId) {
@@ -329,8 +310,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int addCategorizedClimbToStage(int stageId, Double location, SegmentType type, Double averageGradient, Double length) throws IDNotRecognisedException, InvalidLocationException, InvalidStageStateException, InvalidStageTypeException {
-        // WORKS
-
         for (Stage stage: stageArrayList) {
             if (stage.getStageId() == stageId) {
                 if (Boolean.FALSE.equals(stage.getStageState())) {
@@ -465,7 +444,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int[] getStageSegments(int stageId) throws IDNotRecognisedException {
-        // WORKS
         int count = 0;
         int size = stageArrayList.size();
         List < Integer > tempSegmentArrayList = new ArrayList < > ();
@@ -501,7 +479,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int createTeam(String name, String description) throws IllegalNameException, InvalidNameException {
-        // WORKS
         if (name.length() >= 30) {
             throw new InvalidNameException("The name is too long");
         }
@@ -535,7 +512,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public void removeTeam(int teamId) throws IDNotRecognisedException {
-        // WORKS
         for (int i = 0; i < teamArrayList.size(); i++) {
             if (teamArrayList.get(i).getTeamId() == teamId) {
                 teamArrayList.remove(i);
@@ -553,7 +529,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int[] getTeams() {
-        // WORKS
         int j = teamArrayList.size();
         int[] teamIdsArray = new int[j];
         for (int i = 0; i < teamArrayList.size(); i++) {
@@ -571,7 +546,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
-        // WORKS
         int count = 0;
         int size = teamArrayList.size();
         assert size != 0: "There are no teams to select riders from.";
@@ -609,7 +583,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public int createRider(int teamId, String name, int yearOfBirth) throws IDNotRecognisedException, IllegalArgumentException {
-        // WORKS
         if (name == null) {
             throw new IllegalArgumentException("The name is null.");
         }
@@ -646,7 +619,6 @@ public class CyclingPortal implements CyclingPortalInterface {
      */
     @Override
     public void removeRider(int riderId) throws IDNotRecognisedException {
-        // WORKS 
         int count = 0;
         int foundTeamId = 0;
         int size = riderArrayList.size();
